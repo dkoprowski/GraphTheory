@@ -6,8 +6,26 @@ namespace GraphTheory.Lab1
 {
     public class AdjacencyMatrix
     {
+        public int MinimalDegree
+        {
+            get
+            {
+                int minimalDegree = VertexDegree(1);
+                for (int i = 1; i <= matrix.Count; i++)
+                {
+                    if (minimalDegree > VertexDegree(i))
+                        minimalDegree = VertexDegree(i);
+                }
+                return minimalDegree;
+            }
+        }
+        /// <summary>
+        /// Number of verticles in graph
+        /// </summary>
+        public int Order { get { return matrix.Count; } }
+
         private List<List<int>> matrix;
-        
+
         public AdjacencyMatrix()
         {
             matrix = new List<List<int>>();
@@ -26,7 +44,7 @@ namespace GraphTheory.Lab1
         {
             Console.WriteLine("Adjacency Matrix:");
 
-            foreach (var item in matrix)              
+            foreach (var item in matrix)
             {
                 foreach (var field in item)
                 {
@@ -75,7 +93,7 @@ namespace GraphTheory.Lab1
             if (vertexA == vertexB)
                 val = 2;
 
-            if(matrix[vertexA][vertexB] <= 0)
+            if (matrix[vertexA][vertexB] <= 0)
             {
                 Console.WriteLine("There is no such edge [" + (vertexA + 1) + ";" + (vertexB + 1) + "]");
                 return;
@@ -88,6 +106,10 @@ namespace GraphTheory.Lab1
             return matrix[vertex - 1].Sum();
         }
 
+        public bool IsEdge(int vertexA, int vertexB)
+        {
+            return matrix[vertexA][vertexB] > 0;
+        }
         public void PrintVerticesDegrees()
         {
             var degrees = new Dictionary<int, int>();
@@ -107,7 +129,19 @@ namespace GraphTheory.Lab1
                     oddCount += 1;
                 Console.Write("Deg(" + item.Key + ")==" + item.Value + ";  ");
             }
-            Console.WriteLine("\nOdd=="+oddCount+"; Even=="+(items.Count() - oddCount));
+            Console.WriteLine("\nOdd==" + oddCount + "; Even==" + (items.Count() - oddCount));
+        }
+
+        public List<int> Neighbours(int vertex)
+        {
+            var neighbours = new List<int>();
+
+            for (int i = 0; i < matrix[vertex - 1].Count; i++)
+            {
+                if (matrix[vertex - 1][i] > 0)
+                    neighbours.Add(i + 1);
+            }
+            return neighbours;
         }
     }
 }

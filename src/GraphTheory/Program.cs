@@ -9,25 +9,40 @@ namespace GraphTheory
     {
         public static void Main(string[] args)
         {
-            var graph = new Lab1.AdjacencyMatrix(6);
+            var graph = new Lab1.AdjacencyMatrix(5);
             
-            graph.AddEdge(1, 1);
+          //  graph.AddEdge(1, 1);
             graph.AddEdge(1, 5);
             graph.AddEdge(1, 2);
             graph.AddEdge(2, 3);
             graph.AddEdge(2, 5);
             graph.AddEdge(3, 4);
             graph.AddEdge(4, 5);
-            graph.AddEdge(4, 6);
-
+            
+                   
             graph.PrintAdjacency();
             Console.WriteLine();
             Console.WriteLine(graph.VertexDegree(1));
             Console.WriteLine(graph.VertexDegree(3));
             Console.WriteLine(graph.VertexDegree(5));
+            Console.WriteLine("minimal deg: "+ graph.MinimalDegree);
 
+            for (int i = 1; i <= graph.Order; i++)
+            {
+                Console.Write("Neighbours [" + i + "]: ");
+                graph.Neighbours(i).ForEach(_ => Console.Write(_+"; "));
+                Console.WriteLine();
+            }
             graph.PrintVerticesDegrees();
             Console.ReadKey();
+
+            Console.WriteLine("-------------------");
+
+            var cycleFinder = new Lab2.CycleFinder();
+            cycleFinder.GetAnyCycle(graph);
+
+            Console.ReadKey();
+
         }
     }
 }
