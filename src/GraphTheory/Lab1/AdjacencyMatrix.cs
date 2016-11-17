@@ -4,18 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace GraphTheory.Lab1
 {
-    public class Graph
+    public class AdjacencyMatrix
     {
-        private List<List<int>> adjacencyMatrix;
+        private List<List<int>> matrix;
         
-        public Graph()
+        public AdjacencyMatrix()
         {
-            adjacencyMatrix = new List<List<int>>();
+            matrix = new List<List<int>>();
         }
 
-        public Graph(int verticleCount)
+        public AdjacencyMatrix(int verticleCount)
         {
-            adjacencyMatrix = new List<List<int>>();
+            matrix = new List<List<int>>();
             for (int i = 0; i < verticleCount; i++)
             {
                 AddVertex();
@@ -26,7 +26,7 @@ namespace GraphTheory.Lab1
         {
             Console.WriteLine("Adjacency Matrix:");
 
-            foreach (var item in adjacencyMatrix)              
+            foreach (var item in matrix)              
             {
                 foreach (var field in item)
                 {
@@ -38,20 +38,20 @@ namespace GraphTheory.Lab1
 
         public int AddVertex()
         {
-            adjacencyMatrix.Add(Enumerable.Repeat(0, adjacencyMatrix.Count).ToList());
-            foreach (var item in adjacencyMatrix)
+            matrix.Add(Enumerable.Repeat(0, matrix.Count).ToList());
+            foreach (var item in matrix)
             {
                 item.Add(0);
             }
 
-            return adjacencyMatrix.Count;
+            return matrix.Count;
         }
 
         public void RemoveVertex(int vertex)
         {
             vertex -= 1;
-            adjacencyMatrix.Remove(adjacencyMatrix[vertex]);
-            foreach (var item in adjacencyMatrix)
+            matrix.Remove(matrix[vertex]);
+            foreach (var item in matrix)
             {
                 item.RemoveAt(vertex);
             }
@@ -64,7 +64,7 @@ namespace GraphTheory.Lab1
             int val = 1;
             if (vertexA == vertexB)
                 val = 2;
-            adjacencyMatrix[vertexA][vertexB] = adjacencyMatrix[vertexB][vertexA] += val;
+            matrix[vertexA][vertexB] = matrix[vertexB][vertexA] += val;
         }
 
         public void RemoveEdge(int vertexA, int vertexB)
@@ -75,23 +75,23 @@ namespace GraphTheory.Lab1
             if (vertexA == vertexB)
                 val = 2;
 
-            if(adjacencyMatrix[vertexA][vertexB] <= 0)
+            if(matrix[vertexA][vertexB] <= 0)
             {
                 Console.WriteLine("There is no such edge [" + (vertexA + 1) + ";" + (vertexB + 1) + "]");
                 return;
             }
-            adjacencyMatrix[vertexA][vertexB] = adjacencyMatrix[vertexB][vertexA] -= val;
+            matrix[vertexA][vertexB] = matrix[vertexB][vertexA] -= val;
         }
 
         public int VertexDegree(int vertex)
         {
-            return adjacencyMatrix[vertex - 1].Sum();
+            return matrix[vertex - 1].Sum();
         }
 
         public void PrintVerticesDegrees()
         {
             var degrees = new Dictionary<int, int>();
-            for (int i = 1; i <= adjacencyMatrix.Count; i++)
+            for (int i = 1; i <= matrix.Count; i++)
             {
                 degrees.Add(i, VertexDegree(i));
             }

@@ -9,8 +9,8 @@ namespace GraphTheory
     {
         public static void Main(string[] args)
         {
-            var graph = new Lab1.Graph(6);
-
+            var graph = new Lab1.AdjacencyMatrix(6);
+            
             graph.AddEdge(1, 1);
             graph.AddEdge(1, 5);
             graph.AddEdge(1, 2);
