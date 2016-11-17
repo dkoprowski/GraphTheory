@@ -30,7 +30,7 @@ namespace GraphTheory.Lab2
             foreach (var item in verticesVisitCount)
             {
                 if (item > 2)
-                    return ExtractCycle(path);
+                    return ExtractCycle(path, graph);
             }
 
             foreach (var item in graph.Neighbours(vertex))
@@ -44,14 +44,17 @@ namespace GraphTheory.Lab2
             return null;
         }
 
-        private List<int> ExtractCycle(List<int> path)
+        private List<int> ExtractCycle(List<int> path, AdjacencyMatrix graph)
         {
             int cycleVertex = path.Last();
             for (int i = path.Count-2; i >= 0; i--)
             {
                 if(cycleVertex == path[i])
                 {
-                    path.GetRange(i, path.Count - i).ForEach(_ => Console.Write(_ + ":"));
+                    var cycle = path.GetRange(i, path.Count - i);
+
+                    if(cycle.Count > graph.Degree)
+                    cycle.ForEach(_ => Console.Write(_ + ":"));
                     Console.WriteLine();
                     return path.GetRange(i, path.Count - i);
                 }

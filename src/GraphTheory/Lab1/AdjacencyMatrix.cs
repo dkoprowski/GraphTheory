@@ -6,6 +6,19 @@ namespace GraphTheory.Lab1
 {
     public class AdjacencyMatrix
     {
+        public int Degree
+        {
+            get
+            {
+                int degree = VertexDegree(1);
+                for (int i = 1; i <= matrix.Count; i++)
+                {
+                    if (degree < VertexDegree(i))
+                        degree = VertexDegree(i);
+                }
+                return degree;
+            }
+        }
         public int MinimalDegree
         {
             get

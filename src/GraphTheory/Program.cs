@@ -36,12 +36,7 @@ namespace GraphTheory
             graph.PrintVerticesDegrees();
             Console.ReadKey();
 
-            Console.WriteLine("-------------------");
-
-            var cycleFinder = new Lab2.CycleFinder();
-            cycleFinder.GetAnyCycle(graph);
-
-            Console.ReadKey();
+            Lab2.CycleFinderTests.Run();
 
         }
     }
