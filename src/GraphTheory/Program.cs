@@ -37,6 +37,7 @@ namespace GraphTheory
             Console.ReadKey();
 
             Lab2.CycleFinderTests.Run();
+            Lab3.WeightedDiGraphTest.Run();
 
         }
     }

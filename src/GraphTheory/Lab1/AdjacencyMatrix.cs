@@ -37,7 +37,7 @@ namespace GraphTheory.Lab1
         /// </summary>
         public int Order { get { return matrix.Count; } }
 
-        private List<List<int>> matrix;
+        protected List<List<int>> matrix;
 
         public AdjacencyMatrix()
         {
@@ -67,7 +67,7 @@ namespace GraphTheory.Lab1
             }
         }
 
-        public int AddVertex()
+        public virtual int AddVertex()
         {
             matrix.Add(Enumerable.Repeat(0, matrix.Count).ToList());
             foreach (var item in matrix)
