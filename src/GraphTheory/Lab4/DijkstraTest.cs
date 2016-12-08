@@ -11,11 +11,10 @@ namespace GraphTheory.Lab4
         {
             var graph = GetSlidesGraph();
 
-            graph.PrintAdjacency();
+           // graph.PrintAdjacency();
 
             var dijkstra = new Dijkstra();
             var matrix = dijkstra.RunDijkstraAlg(graph, 1);
-            Console.Write(matrix.Length);
         }      
 
         private static WeightedDiAdjacencyMatrix GetSlidesGraph()

@@ -29,7 +29,10 @@ namespace GraphTheory.Lab4
                     shortestPathsMatrix[i-1] = float.PositiveInfinity;
             }
 
-            while(verticleToCheck.Count > 0)
+            Console.WriteLine("Dijkstra:");
+            PrintValues(shortestPathsMatrix);
+
+            while (verticleToCheck.Count > 0)
             {
                 var minIndex = IndexOfMinElement(shortestPathsMatrix, verticleToCheck);
                 verticleToCheck.Remove(minIndex);
@@ -38,6 +41,7 @@ namespace GraphTheory.Lab4
                 {
                     shortestPathsMatrix[item] = Math.Min(shortestPathsMatrix[item], shortestPathsMatrix[minIndex] + Weight(minIndex, item, graph));
                 }
+                PrintValues(shortestPathsMatrix);
             }
 
             return shortestPathsMatrix;
@@ -62,6 +66,18 @@ namespace GraphTheory.Lab4
                 return float.PositiveInfinity;
             else
                 return edge.Weight;
+        }
+
+        private void PrintValues(float[] matrix)
+        {
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                if(float.IsInfinity(matrix[i]))
+                    Console.Write("~ ");
+                else
+                    Console.Write(matrix[i] + " ");
+            }
+            Console.WriteLine();
         }
     }
 }
