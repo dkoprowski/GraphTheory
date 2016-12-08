@@ -52,6 +52,22 @@ namespace GraphTheory.Lab3
             Edges.Add(new Edge() { VertexA = vertexA, VertexB = vertexB, Weight = weight });
         }
 
+        public void AddDuplexEdge(int vertexA, int vertexB, float weight)
+        {
+            if (weight < 0)
+            {
+                Console.WriteLine("ERROR! Weight must be positive! This weight is " + weight);
+                return;
+            }
+            vertexA -= 1;
+            vertexB -= 1;
+            matrix[vertexA][vertexB] = weight;
+            matrix[vertexB][vertexA] = weight;
+
+            Edges.Add(new Edge() { VertexA = vertexA, VertexB = vertexB, Weight = weight });
+            Edges.Add(new Edge() { VertexA = vertexB, VertexB = vertexA, Weight = weight });
+        }
+
         public WeightedDiAdjacencyMatrix Transpose()
         {
             WeightedDiAdjacencyMatrix graph = new WeightedDiAdjacencyMatrix(matrix.Count);
@@ -86,10 +102,15 @@ namespace GraphTheory.Lab3
 
             for (int i = 0; i < matrix[vertex - 1].Count; i++)
             {
-                if (matrix[vertex - 1][i] > 0)
+                if (matrix[vertex - 1][i] != null)
                     neighbours.Add(i + 1);
             }
             return neighbours;
+        }
+
+        public Edge GetEdge(int vertexA, int vertexB)
+        {
+            return Edges.Find(e => e.VertexA == vertexA && e.VertexB == vertexB);
         }
     }
 }

@@ -9,9 +9,9 @@ namespace GraphTheory
     {
         public static void Main(string[] args)
         {
+/*
             var graph = new Lab1.AdjacencyMatrix(5);
             
-          //  graph.AddEdge(1, 1);
             graph.AddEdge(1, 5);
             graph.AddEdge(1, 2);
             graph.AddEdge(2, 3);
@@ -35,9 +35,12 @@ namespace GraphTheory
             }
             graph.PrintVerticesDegrees();
             Console.ReadKey();
+            */
+//            Lab2.CycleFinderTests.Run();
+          //  Lab3.WeightedDiGraphTest.Run();
+            Lab4.DijkstraTest.Run();
 
-            Lab2.CycleFinderTests.Run();
-            Lab3.WeightedDiGraphTest.Run();
+            Console.ReadKey();
 
         }
     }
