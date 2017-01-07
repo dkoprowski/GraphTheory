@@ -20,7 +20,7 @@ namespace GraphTheory
             Console.WriteLine("Type [2] for CycleFinder");
             Console.WriteLine("Type [3] for WeightedDiGraph");
             Console.WriteLine("Type [4] for Dijkstra");
-            Console.WriteLine("Type [5] for Graph Cut problem");
+            Console.WriteLine("Type [5] for Ford Fulkerson");
             Console.WriteLine("Type [exit] or [q] to finish program");
 
             GetResponse();

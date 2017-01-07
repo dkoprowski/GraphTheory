@@ -112,5 +112,28 @@ namespace GraphTheory.Lab3
         {
             return Edges.Find(e => e.VertexA == vertexA && e.VertexB == vertexB);
         }
+
+        public bool IsEdge(int vertexA, int vertexB)
+        {
+            var edge = Edges.Find(e => e.VertexA == vertexA && e.VertexB == vertexB);
+            if (edge != null)
+                return true;
+
+            return false;
+        }
+
+        public Edge GetEdgeByLabels(int vertexA, int vertexB)
+        {
+            return Edges.Find(e => e.VertexA == vertexA-1 && e.VertexB == vertexB-1);
+        }
+
+        public bool IsEdgeByLabels(int vertexA, int vertexB)
+        {
+            var edge = Edges.Find(e => e.VertexA == vertexA-1 && e.VertexB == vertexB-1);
+            if (edge != null)
+                return true;
+
+            return false;
+        }
     }
 }
