@@ -9,39 +9,55 @@ namespace GraphTheory
     {
         public static void Main(string[] args)
         {
-/*
-            var graph = new Lab1.AdjacencyMatrix(5);
-            
-            graph.AddEdge(1, 5);
-            graph.AddEdge(1, 2);
-            graph.AddEdge(2, 3);
-            graph.AddEdge(2, 5);
-            graph.AddEdge(3, 4);
-            graph.AddEdge(4, 5);
-            
-                   
-            graph.PrintAdjacency();
-            Console.WriteLine();
-            Console.WriteLine(graph.VertexDegree(1));
-            Console.WriteLine(graph.VertexDegree(3));
-            Console.WriteLine(graph.VertexDegree(5));
-            Console.WriteLine("minimal deg: "+ graph.MinimalDegree);
+            WriteOptions();            
+        }
 
-            for (int i = 1; i <= graph.Order; i++)
+
+        static void WriteOptions()
+        {
+            Console.WriteLine("\nChoose an algorithm:");
+            Console.WriteLine("Type [1] for AdjacencyMatrix");
+            Console.WriteLine("Type [2] for CycleFinder");
+            Console.WriteLine("Type [3] for WeightedDiGraph");
+            Console.WriteLine("Type [4] for Dijkstra");
+            Console.WriteLine("Type [5] for Graph Cut problem");
+            Console.WriteLine("Type [exit] or [q] to finish program");
+
+            GetResponse();
+        }
+
+        static void GetResponse()
+        {
+            string choosedOption = Console.ReadLine();
+            Console.WriteLine("-----------------------------------");
+
+            switch (choosedOption)
             {
-                Console.Write("Neighbours [" + i + "]: ");
-                graph.Neighbours(i).ForEach(_ => Console.Write(_+"; "));
-                Console.WriteLine();
+                case "1":
+                    Lab1.AdjacencyMatrixTest.Run();
+                    break;
+                case "2":
+                    Lab2.CycleFinderTests.Run();
+                    break;
+                case "3":
+                    Lab3.WeightedDiGraphTest.Run();
+                    break;
+                case "4":
+                    Lab4.DijkstraTest.Run();
+                    break;
+                case "5":
+                    FordFulkerson.MaximalFlowTest.Run();
+                    break;
+                default:
+                    Console.WriteLine("I don't understand. Try something from list below: ");
+                    break;
+                case "exit":
+                    return;
+                case "q":
+                    return;
             }
-            graph.PrintVerticesDegrees();
-            Console.ReadKey();
-            */
-//            Lab2.CycleFinderTests.Run();
-          //  Lab3.WeightedDiGraphTest.Run();
-            Lab4.DijkstraTest.Run();
-
-            Console.ReadKey();
-
+            Console.WriteLine("-----------------------------------");
+            WriteOptions();
         }
     }
 }
