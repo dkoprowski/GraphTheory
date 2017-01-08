@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphTheory.FordFulkerson
 {
+    //Implemented with pseudocode: http://eduinf.waw.pl/inf/alg/001_search/0146.php#P2
     public class EdmondsKarp
     {
         public float? MaximumFlow(WeightedDiAdjacencyMatrix graph, int s, int t)
@@ -30,7 +31,7 @@ namespace GraphTheory.FordFulkerson
                     bfsVertex.Dequeue();
                 }
                 bfsVertex.Enqueue(s);
-                Console.WriteLine("iteration "+iteration);
+                Console.WriteLine("\n> iteration "+iteration);
                 while (bfsVertex.Count > 0)
                 {
                     noPath = true;
@@ -80,6 +81,7 @@ namespace GraphTheory.FordFulkerson
                 fMax += cfp[t];
 
                 var ny = t;
+                Console.WriteLine("Operating with "+ cfp[t]);
                 while (ny != s)
                 {
                     var x = predecesors[ny];
@@ -92,6 +94,11 @@ namespace GraphTheory.FordFulkerson
                         nettoMatrix.AddEdge(ny + 1, x + 1, 0f);
 
                     nettoMatrix.GetEdgeByLabels(ny + 1, x + 1).Weight -= cfp[t];
+
+                    Console.WriteLine("nettoValue(" + (x + 1) + "," + (ny + 1) + ") == " + nettoMatrix.GetEdgeByLabels(x + 1, ny + 1).Weight);
+                   // Console.WriteLine("nettoValue(" + (ny + 1) + "," + (x + 1) + ") == " + nettoMatrix.GetEdgeByLabels(ny + 1, x + 1).Weight);
+                   // Console.WriteLine("~~");
+
                     ny = x;
                 }
                 iteration++;
@@ -111,9 +118,9 @@ namespace GraphTheory.FordFulkerson
             while (path.Count > 0)
             {
                 if (path.Count == 1)
-                    Console.WriteLine(" " + path.Pop());
+                    Console.WriteLine(" " + (path.Pop()+1));
                 else
-                    Console.Write(path.Pop() + " -> ");
+                    Console.Write((path.Pop()+1) + " -> ");
             }
             Console.WriteLine();
 
