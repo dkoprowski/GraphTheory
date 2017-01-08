@@ -8,7 +8,7 @@ namespace GraphTheory.FordFulkerson
 {
     public class EdmondsKarp
     {
-        public float MaximumFlow(WeightedDiAdjacencyMatrix graph, int s, int t)
+        public float? MaximumFlow(WeightedDiAdjacencyMatrix graph, int s, int t)
         {
             bool noPath = false;
             float fMax = 0f;
@@ -16,6 +16,7 @@ namespace GraphTheory.FordFulkerson
             var predecesors = new int[graph.Order];
             var cfp = new float[graph.Order];
             Queue<int> bfsVertex = new Queue<int>();
+            int iteration = 0;
             while (true)
             {
                 for (int i = 0; i < predecesors.Length; i++)
@@ -29,6 +30,7 @@ namespace GraphTheory.FordFulkerson
                     bfsVertex.Dequeue();
                 }
                 bfsVertex.Enqueue(s);
+                Console.WriteLine("iteration "+iteration);
                 while (bfsVertex.Count > 0)
                 {
                     noPath = true;
@@ -40,15 +42,21 @@ namespace GraphTheory.FordFulkerson
                         if(nettoMatrix.IsEdgeByLabels(x+1,y))
                             nettoValue = nettoMatrix.GetEdgeByLabels(x + 1, y).Weight;
 
-                        var cp = graph.GetEdgeByLabels(x + 1, y).Weight - nettoValue;
-                        if (cp == 0f || predecesors[y - 1] != -1)
+                        var residualCapacity = graph.GetEdgeByLabels(x + 1, y).Weight - nettoValue;
+
+                        /*
+                         * Jezeli wierzcholek byl odwiedzony lub jego przepustowosc rezydualna wynosi 0
+                         * to nie obliczamy dla niego CFP 
+                         */
+                        if (residualCapacity == 0f || predecesors[y - 1] != -1)
                             continue;
 
                         predecesors[y - 1] = x;
-                        cfp[y - 1] = Math.Min(cfp[x], cp);
+                        cfp[y - 1] = Math.Min(cfp[x], residualCapacity);
 
                         if ((y - 1) == t)
                         {
+                            ShowPath(predecesors, t);
                             noPath = false;
                             breakWhile = true;
                             break;
@@ -59,7 +67,15 @@ namespace GraphTheory.FordFulkerson
                         break;
                 }
                 if (noPath)
+                {
+                    if (iteration == 0)
+                    {
+                        Console.WriteLine("ERROR: NO PATH");
+                        return null;
+                    }
+
                     return fMax;
+                }
 
                 fMax += cfp[t];
 
@@ -78,8 +94,29 @@ namespace GraphTheory.FordFulkerson
                     nettoMatrix.GetEdgeByLabels(ny + 1, x + 1).Weight -= cfp[t];
                     ny = x;
                 }
+                iteration++;
             }
             return fMax;
+        }
+
+        private void ShowPath(int[] predecesors, int pathFrom)
+        {
+            var path = new Stack<int>();
+            path.Push(pathFrom);
+            while(path.Peek() != 0)
+            {
+                path.Push(predecesors[path.Peek()]);
+            }
+
+            while (path.Count > 0)
+            {
+                if (path.Count == 1)
+                    Console.WriteLine(" " + path.Pop());
+                else
+                    Console.Write(path.Pop() + " -> ");
+            }
+            Console.WriteLine();
+
         }
     }
 }

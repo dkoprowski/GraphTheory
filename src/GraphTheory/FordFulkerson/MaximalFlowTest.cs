@@ -10,8 +10,17 @@ namespace GraphTheory.FordFulkerson
         public static void Run()
         {
             var edmondsKarp = new EdmondsKarp();
-            Console.WriteLine( edmondsKarp.MaximumFlow(CormenMatrix(), 0, 5));
-            Console.WriteLine( edmondsKarp.MaximumFlow(YoutubeMatrix(), 0, 5));
+            Console.WriteLine("\n----- No path graph -----");
+            Console.WriteLine(edmondsKarp.MaximumFlow(NoPathMatrix(), 0, 4));
+
+            Console.WriteLine("\n Simple graph: s --7--> v1 --100--> t");
+            Console.WriteLine("Result: "+edmondsKarp.MaximumFlow(SimpleMatrix(), 0, 2));
+
+            Console.WriteLine("\n----- Cormen graph -----");
+            Console.WriteLine("Result: "+ edmondsKarp.MaximumFlow(CormenMatrix(), 0, 5));
+
+            Console.WriteLine("\n----- Custom graph -----");
+            Console.WriteLine("Result: "+ edmondsKarp.MaximumFlow(YoutubeMatrix(), 0, 5));
         }
 
         private  static WeightedDiAdjacencyMatrix CormenMatrix()
@@ -52,6 +61,30 @@ namespace GraphTheory.FordFulkerson
             matrix.AddEdge(5, 3, 6f);
             matrix.AddEdge(5, 6, 10f);
 
+
+            return matrix;
+        }
+
+        private static WeightedDiAdjacencyMatrix NoPathMatrix()
+        {
+            var matrix = new WeightedDiAdjacencyMatrix(5);
+            matrix.AddEdge(1, 2, 5f);
+
+            matrix.AddEdge(2, 3, 7f);
+
+            matrix.AddEdge(3, 2, 2f);
+
+            matrix.AddEdge(4, 5, 15f);
+
+            return matrix;
+        }
+
+        private static WeightedDiAdjacencyMatrix SimpleMatrix()
+        {
+            var matrix = new WeightedDiAdjacencyMatrix(3);
+            matrix.AddEdge(1, 2, 7f);
+
+            matrix.AddEdge(2, 3, 100f);
 
             return matrix;
         }
