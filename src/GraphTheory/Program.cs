@@ -21,6 +21,7 @@ namespace GraphTheory
             Console.WriteLine("Type [3] for WeightedDiGraph");
             Console.WriteLine("Type [4] for Dijkstra");
             Console.WriteLine("Type [5] for Ford Fulkerson");
+            Console.WriteLine("Type [6] for Maximal Matching");
             Console.WriteLine("Type [exit] or [q] to finish program");
 
             GetResponse();
@@ -47,6 +48,9 @@ namespace GraphTheory
                     break;
                 case "5":
                     FordFulkerson.MaximalFlowTest.Run();
+                    break;
+                case "6":
+                    MaximalMatching.MaximalMatchingTest.Run();
                     break;
                 default:
                     Console.WriteLine("I don't understand. Try something from list below: ");

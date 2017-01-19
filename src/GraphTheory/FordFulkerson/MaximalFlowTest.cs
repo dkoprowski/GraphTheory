@@ -21,6 +21,9 @@ namespace GraphTheory.FordFulkerson
 
             Console.WriteLine("\n----- Custom graph -----");
             Console.WriteLine("Result: "+ edmondsKarp.MaximumFlow(YoutubeMatrix(), 0, 5));
+
+
+       //     Console.WriteLine("Result: "+ edmondsKarp.MaximumFlow(Testtest(), 6, 7));
         }
 
         private  static WeightedDiAdjacencyMatrix CormenMatrix()
@@ -85,6 +88,30 @@ namespace GraphTheory.FordFulkerson
             matrix.AddEdge(1, 2, 7f);
 
             matrix.AddEdge(2, 3, 100f);
+
+            return matrix;
+        }
+
+        private static WeightedDiAdjacencyMatrix Testtest()
+        {
+            var matrix = new WeightedDiAdjacencyMatrix(8);
+
+            matrix.AddEdge(7, 2, 1f);
+            matrix.AddEdge(7, 4, 1f);
+            matrix.AddEdge(7, 6, 1f);
+
+            matrix.AddEdge(2, 1, 1f);
+            matrix.AddEdge(2, 3, 1f);
+
+            matrix.AddEdge(4, 3, 1f);
+            matrix.AddEdge(4, 5, 1f);
+
+            matrix.AddEdge(6, 1, 1f);
+            matrix.AddEdge(6, 5, 1f);
+
+            matrix.AddEdge(1, 8, 1f);
+            matrix.AddEdge(3, 8, 1f);
+            matrix.AddEdge(5, 8, 1f);
 
             return matrix;
         }
