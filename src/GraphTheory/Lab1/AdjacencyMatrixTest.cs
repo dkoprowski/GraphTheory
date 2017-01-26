@@ -23,10 +23,11 @@ namespace GraphTheory.Lab1
 
                 graph.PrintAdjacency();
                 Console.WriteLine();
-                Console.WriteLine(graph.VertexDegree(1));
-                Console.WriteLine(graph.VertexDegree(3));
-                Console.WriteLine(graph.VertexDegree(5));
+                Console.WriteLine("VertexDegree(1) = " + graph.VertexDegree(1));
+                Console.WriteLine("VertexDegree(3) = " + graph.VertexDegree(3));
+                Console.WriteLine("VertexDegree(5) = " + graph.VertexDegree(5));
                 Console.WriteLine("minimal deg: " + graph.MinimalDegree);
+                Console.WriteLine("maximal deg: " + graph.MaximalDegree);
 
                 for (int i = 1; i <= graph.Order; i++)
                 {
@@ -35,6 +36,16 @@ namespace GraphTheory.Lab1
                     Console.WriteLine();
                 }
                 graph.PrintVerticesDegrees();
+
+                Console.WriteLine("\nRemoving 1-5 edge");
+                graph.RemoveEdge(1, 5);
+                graph.PrintAdjacency();
+
+
+                Console.WriteLine("\nRemoving 5 vertex");
+                graph.RemoveVertex(5);
+                graph.PrintAdjacency();
+
                 Console.ReadKey();
 
             }

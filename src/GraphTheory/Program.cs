@@ -18,7 +18,7 @@ namespace GraphTheory
             Console.WriteLine("\nChoose an algorithm:");
             Console.WriteLine("Type [1] for AdjacencyMatrix");
             Console.WriteLine("Type [2] for CycleFinder");
-            Console.WriteLine("Type [3] for WeightedDiGraph");
+            Console.WriteLine("Type [3] for Strongly Connected Components");
             Console.WriteLine("Type [4] for Dijkstra");
             Console.WriteLine("Type [5] for Ford Fulkerson");
             Console.WriteLine("Type [6] for Maximal Matching");

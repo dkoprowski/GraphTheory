@@ -32,6 +32,19 @@ namespace GraphTheory.Lab1
                 return minimalDegree;
             }
         }
+        public int MaximalDegree
+        {
+            get
+            {
+                int maximalDegree = VertexDegree(1);
+                for (int i = 1; i <= matrix.Count; i++)
+                {
+                    if (maximalDegree < VertexDegree(i))
+                        maximalDegree = VertexDegree(i);
+                }
+                return maximalDegree;
+            }
+        }
         /// <summary>
         /// Number of verticles in graph
         /// </summary>

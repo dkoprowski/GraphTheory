@@ -76,7 +76,8 @@ namespace GraphTheory.MaximalMatching
             List<int> redVerticles = null;
             List<int> blueVerticles = null;
             if (!IsGraphBipartite(graph, out redVerticles, out blueVerticles))
-            {                
+            {
+                Console.WriteLine("Graph is not Bipartite!");
                 return;
             }
 

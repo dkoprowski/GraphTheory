@@ -30,8 +30,9 @@ namespace GraphTheory.Lab4
             }
 
             Console.WriteLine("Dijkstra:");
+            Console.Write("iter 0:\t");
             PrintValues(shortestPathsMatrix);
-
+            int iter = 1;
             while (verticleToCheck.Count > 0)
             {
                 var minIndex = IndexOfMinElement(shortestPathsMatrix, verticleToCheck);
@@ -41,6 +42,8 @@ namespace GraphTheory.Lab4
                 {
                     shortestPathsMatrix[item] = Math.Min(shortestPathsMatrix[item], shortestPathsMatrix[minIndex] + Weight(minIndex, item, graph));
                 }
+                Console.Write("iter "+ iter + ":\t");
+                iter++;
                 PrintValues(shortestPathsMatrix);
             }
 

@@ -12,9 +12,7 @@ namespace GraphTheory.MaximalMatching
         {
             var maximalMatching = new MaximalMatching();
 
-            Console.WriteLine("\n ");
-            maximalMatching.ComputeMaximalMatching(CormenMatrix());
-            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine("\n ");  
             maximalMatching.ComputeMaximalMatching(Cycled5Matrix());
             Console.WriteLine("---------------------------------------------");
             maximalMatching.ComputeMaximalMatching(Cycled6Matrix());
@@ -22,22 +20,6 @@ namespace GraphTheory.MaximalMatching
 
         }
 
-        private static WeightedDiAdjacencyMatrix CormenMatrix()
-        {
-            var matrix = new WeightedDiAdjacencyMatrix(6);
-            matrix.AddDuplexEdge(1, 4, 1f);
-
-            matrix.AddDuplexEdge(2, 4, 1f);
-
-            matrix.AddDuplexEdge(3, 5, 1f);
-
-            matrix.AddDuplexEdge(5, 2, 1f);
-
-            matrix.AddDuplexEdge(6, 2, 1f);
-
-
-            return matrix;
-        }
 
         private static WeightedDiAdjacencyMatrix Cycled6Matrix()
         {
@@ -73,5 +55,23 @@ namespace GraphTheory.MaximalMatching
 
             return matrix;
         }
+
+        private static WeightedDiAdjacencyMatrix CormenMatrix()
+        {
+            var matrix = new WeightedDiAdjacencyMatrix(6);
+            matrix.AddDuplexEdge(1, 4, 1f);
+
+            matrix.AddDuplexEdge(2, 4, 1f);
+
+            matrix.AddDuplexEdge(3, 5, 1f);
+
+            matrix.AddDuplexEdge(5, 2, 1f);
+
+            matrix.AddDuplexEdge(6, 2, 1f);
+
+
+            return matrix;
+        }
+
     }
 }

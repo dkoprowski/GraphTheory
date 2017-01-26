@@ -34,6 +34,7 @@ namespace GraphTheory.Lab3
                 // Print Strongly connected component of the popped vertex
                 if (visited[vert] == false)
                 {
+                    Console.Write("SCC: ");
                     DFSUtil(vert, visited, transposed);
                     Console.WriteLine();
                 }
@@ -61,7 +62,7 @@ namespace GraphTheory.Lab3
         private void DFSUtil(int vert, bool[] visited, WeightedDiAdjacencyMatrix matrix)
         {
             visited[vert] = true;
-            Console.Write(vert + " ");
+            Console.Write((vert+1) + " ");
 
             var neighbours = matrix.Neighbours(vert + 1);
             foreach (var item in neighbours)
