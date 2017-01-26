@@ -138,6 +138,12 @@ namespace GraphTheory.Lab1
         }
         public void PrintVerticesDegrees()
         {
+            var odd = OddVerticles();
+            Console.WriteLine("\nOdd==" + odd.Count + "; Even==" + (Order - odd.Count));
+        }
+
+        private Dictionary<int, int> OddVerticles()
+        {
             var degrees = new Dictionary<int, int>();
             for (int i = 1; i <= matrix.Count; i++)
             {
@@ -148,16 +154,17 @@ namespace GraphTheory.Lab1
                         orderby pair.Value descending
                         select pair;
 
-            int oddCount = 0;
+            var odd = new Dictionary<int, int>();
+
+           // int oddCount = 0;
             foreach (var item in items)
             {
                 if (item.Value % 2 != 0)
-                    oddCount += 1;
-                Console.Write("Deg(" + item.Key + ")==" + item.Value + ";  ");
+                    odd.Add(item.Key, item.Value);                
             }
-            Console.WriteLine("\nOdd==" + oddCount + "; Even==" + (items.Count() - oddCount));
-        }
 
+            return odd;
+        }
         public List<int> Neighbours(int vertex)
         {
             var neighbours = new List<int>();
@@ -168,6 +175,69 @@ namespace GraphTheory.Lab1
                     neighbours.Add(i + 1);
             }
             return neighbours;
+        }
+
+        private bool IsConnected()
+        {
+            bool[] visited = new bool[Order];
+            for (int i = 0; i < visited.Length; i++)
+                visited[i] = false;
+
+            DFSUtil(0, visited);
+
+            foreach (var item in visited)
+            {
+                if (!item)
+                    return false;
+            }
+            return true;
+        }
+
+        private int IsEulerian()
+        {
+            // Check if all non-zero degree vertices are connected
+            if (!IsConnected())
+                return 0;
+
+            // Count vertices with odd degree
+            int odd = OddVerticles().Count;
+
+            // If count is more than 2, then graph is not Eulerian
+            if (odd > 2)
+                return 0;
+
+            // If odd count is 2, then semi-eulerian.
+            // If odd count is 0, then eulerian
+            // Note that odd count can never be 1 for undirected graph
+            return (odd == 2) ? 1 : 2;
+        }
+
+        public void PrintIsEulerian()
+        {
+            var eulerian = IsEulerian();
+            switch (eulerian)
+            {
+                case 1:
+                    Console.WriteLine("Graph is Semi-Eulerian (has an Eulerian path)");
+                    break;
+                case 2:
+                    Console.WriteLine("Graph is Eulerian (has an Eulerian circut)");
+                    break;
+                default: Console.WriteLine("Graph non eulerian");
+                    break;
+            }
+        }
+
+        private void DFSUtil(int vert, bool[] visited)
+        {
+            visited[vert] = true;
+
+            var neighbours = Neighbours(vert + 1);
+            foreach (var item in neighbours)
+            {
+                if (!visited[item - 1])
+                    DFSUtil(item - 1, visited);
+            }
         }
     }
 }

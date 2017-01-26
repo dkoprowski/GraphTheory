@@ -11,7 +11,7 @@ namespace GraphTheory.Lab1
         {
             {
 
-                var graph = new Lab1.AdjacencyMatrix(5);
+                var graph = new Lab1.AdjacencyMatrix(7);
 
                 graph.AddEdge(1, 5);
                 graph.AddEdge(1, 2);
@@ -19,7 +19,6 @@ namespace GraphTheory.Lab1
                 graph.AddEdge(2, 5);
                 graph.AddEdge(3, 4);
                 graph.AddEdge(4, 5);
-
 
                 graph.PrintAdjacency();
                 Console.WriteLine();
@@ -36,6 +35,7 @@ namespace GraphTheory.Lab1
                     Console.WriteLine();
                 }
                 graph.PrintVerticesDegrees();
+                graph.PrintIsEulerian();
 
                 Console.WriteLine("\nRemoving 1-5 edge");
                 graph.RemoveEdge(1, 5);
